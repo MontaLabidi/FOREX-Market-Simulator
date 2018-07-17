@@ -1,0 +1,49 @@
+<nav class="navbar navbar-expand-sm bg-light navbar-light py-sm-0">
+  <a class="navbar-brand nav-link " [routerLink]="['/']">
+    <span class="navbar-brand mb-0 h1" style="color: #f4ba2f;">Market Simulator</span>
+  </a>
+  <ul *ngIf="nav.show; else logout" class="navbar-nav ml-auto mr-2 my-sm-2">
+    <li class="nav-item "><a class="nav-link" [routerLink]="['/register']">
+      <i class="fa fa-user-plus" style="font-size:20px"></i> Sign Up</a></li>
+    <li class="nav-item "><a class="nav-link" [routerLink]="['/login']">
+      <i class="fa fa-sign-in" style="font-size:20px"></i> Login</a></li>
+  </ul>
+  <ng-template #logout>
+    <ul class="navbar-nav ml-auto mr-2 my-sm-2">
+      <li class="nav-item mx-sm-2">
+        <a class="nav-link" [routerLink]="['/']">
+          <i class="fas fa-home" style="font-size:20px"></i></a>
+      </li>
+      <li class="nav-item mx-sm-2">
+        <a class="nav-link" [routerLink]="['/exchange']">
+          <i class="far fa-chart-bar" style="font-size:20px"></i></a>
+      </li>
+      <li class="nav-item mx-sm-2">
+        <a class="nav-link" href="#">
+          <i class="far fa-bell" style="font-size:20px"></i></a>
+      </li>
+      <li class="nav-item mx-sm-2">
+        <a class="nav-link" [routerLink]="['/activity']">
+          <i class="far fa-list-alt" style="font-size:20px"></i></a>
+      </li>
+      <li class="nav-item dropdown mx-sm-2">
+        <a class="nav-link dropdown-toggle active" href="/user" id="navbarDropdownMenuLink" data-toggle="dropdown"
+           aria-haspopup="true" aria-expanded="false">
+          <i class="far fa-user" style="font-size:20px"></i>
+        </a>
+        <div class="dropdown-menu dropdown-menu-right mt-sm-2" aria-labelledby="navbarDropdownMenuLink">
+          <div class="user-full-name-info" style="font-size: 17px; margin:0 10px;">
+            {{nav.user.firstName}} {{nav.user.lastName}}
+          </div>
+          <div class="username-info" style="font-size: 14px;margin:0 15px;">
+            @{{nav.username}}
+          </div>
+          <a class="dropdown-item" href="/user">
+            Profile</a>
+          <a class="dropdown-item" (click)="auth.logout()">
+            Logout</a>
+        </div>
+      </li>
+    </ul>
+  </ng-template>
+</nav>

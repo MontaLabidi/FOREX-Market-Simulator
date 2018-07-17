@@ -1,0 +1,77 @@
+<div class="row ">
+  <!-- <div class="col-md-auto">
+    <h2> {{currentUser.firstName}} {{currentUser.lastName}}!</h2>
+     -->
+  <div class="col-sm-6">
+    <div class="container" style="margin-bottom:20px;">
+      <h4><i class="far fa-id-card"></i> User Info</h4>
+    </div>
+    <table class="table table-striped">
+      <tbody>
+      <tr>
+        <th>Joined</th>
+        <td>{{user.createdOn | date: 'EEE, MMM d, y, h:mm:ss a'}}</td>
+      </tr>
+      <tr>
+        <th>First name</th>
+        <td>{{user.firstName}}</td>
+      </tr>
+      <tr>
+        <th>Last name</th>
+        <td>{{user.lastName}}</td>
+      </tr>
+      <tr>
+        <th>Username</th>
+        <td>{{user.username}}</td>
+      </tr>
+      <tr>
+        <th>Email</th>
+        <td>{{user.email}}</td>
+      </tr>
+      </tbody>
+    </table>
+    <button class="btn btn-outline-success float-left" (click)="editUser(user)">
+      <i class="fa fa-edit"></i> Edit Account
+    </button>
+    <button class="btn btn-outline-danger float-right" (click)="delete(user)">
+      <i class="fa fa-trash-o"></i> Delete Account
+    </button>
+  </div>
+  <div class="col-sm-6">
+    <div class="container" style="margin-bottom:20px;">
+      <h4><i class="far fa-credit-card"></i> Wallet</h4>
+    </div>
+    <table class="table table-borderless ">
+      <tbody>
+      <tr>
+        <th>Balance</th>
+        <td>{{wallet?.balance}} USD</td>
+      </tr>
+      <tr>
+        <th>Equity</th>
+        <td>{{wallet?.equity}} USD</td>
+      </tr>
+      <tr>
+        <th>Margin</th>
+        <td>{{wallet?.margin}} USD</td>
+      </tr>
+      <tr>
+        <th>Free Margin</th>
+        <td>{{wallet?.freeMargin}} USD</td>
+      </tr>
+      <tr>
+        <th>Profit</th>
+        <td>{{wallet?.profit}} USD</td>
+      </tr>
+      </tbody>
+    </table>
+    <button class="btn btn-outline-info float-left" [routerLink]="['/activity']">
+      <i class="far fa-list-alt"></i> Open Positions
+    </button>
+    <button class="btn btn-outline-info float-right" [routerLink]="['/exchange']">
+      <i class="far fa-chart-bar"></i> Trade
+    </button>
+
+  </div>
+
+</div>

@@ -1,0 +1,36 @@
+<div class="container" style="margin-bottom:20px;">
+  <h4><i class="far fa-list-alt"></i> User Activities</h4>
+</div>
+<div class="home-data-table">
+  <table id="ac-data-table" class="table row-border hm-data-table table-hover" cellspacing="0" width="100%">
+    <thead>
+    <tr>
+      <th>Time</th>
+      <th>Pair</th>
+      <th>Type</th>
+      <th>Amount</th>
+      <th>Price</th>
+      <th>Current Price</th>
+      <th>profit</th>
+      <th>Close</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let trade of Trades" ng-form="myForme">
+      <td>{{trade.createdOn | date: 'y.MM.dd, HH:mm:ss'}}</td>
+      <td>
+        {{trade.currency.baseCurrency}}/{{trade.currency.quoteCurrency}}
+      </td>
+      <td><span class="green-color">{{trade.type}}</span></td>
+      <td>{{trade.amount}}</td>
+      <td>{{trade.price}}</td>
+      <td>{{trade.currency.quote}}</td>
+      <td>{{trade.profit}}</td>
+      <td>
+        <button class="btn btn-outline-danger" type="button" (click)="closeTrade(trade.id)">
+          <i class="fa fa-close"></i></button>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>

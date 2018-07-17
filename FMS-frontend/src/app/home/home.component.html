@@ -1,0 +1,165 @@
+<div class="container ">
+  <div class="row justify-content-center">
+    <div class="col-md-auto">
+      <!-- <h3>Welcome to the market Simulator</h3> -->
+      <div class="banner1 ">
+        <h1>Market Simulator - Exchange The World</h1>
+        <div *ngIf="!currentUser" class="links">
+          <p><a [routerLink]="['/register']">Create Account</a>
+            <span class="line"></span>Already Registered? <a [routerLink]="['/login']">Login</a></p>
+        </div>
+      </div>
+      <div class="page-container">
+        <div class="container">
+          <div class="row statistics-widget">
+            <div *ngFor="let currency of currencies" class="col">
+              <a href="#" class="statistics-widget-link">
+                <div class="statistics-widget-grid">
+                  <div class="content">
+                    <h5>ETH/BTC</h5>
+                    <h6><strong class="green-color">0.08735613</strong> $0.05</h6>
+                    <p>Volume : 2,290.87 BTC</p>
+                  </div>
+                  <span class="status green-color">1.68%</span>
+                  <div class="chart-bar">
+                    <svg version="1.1" class="highcharts-root" xmlns="http://www.w3.org/2000/svg">
+                      <g transform="translate(0.5,0.5)">
+                        <path id="BNBBTC" stroke="rgba(244,220,174,1)" fill="none" stroke-width="1"
+                              d="M0 0 L10 8 L20 2 L30 1 L40 4 L50 9 L60 23 L70 24 L80 23 L90 26 L100 35 L110 40 L120 40 L130 37 L140 38 L150 30 L160 26 L170 23 L180 28 L190 24 L200 17 L210 21 L220 24 L230 24"></path>
+                        <path id="BNBBTCfill" fill="rgba(254,251,245,1)" stroke="none"
+                              d="M0 40 L0 0 L10 8 L20 2 L30 1 L40 4 L50 9 L60 23 L70 24 L80 23 L90 26 L100 35 L110 40 L120 40 L130 37 L140 38 L150 30 L160 26 L170 23 L180 28 L190 24 L200 17 L210 21 L220 24 L230 24 L230 40"></path>
+                      </g>
+                    </svg>
+                  </div>
+                </div>
+              </a>
+            </div>
+
+
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="home-data-table">
+                <nav class="nav-justified">
+                  <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                    <a class="nav-item nav-link active" id="nav-fav-tab" data-toggle="tab" href="#nav-fav" role="tab"
+                       aria-controls="nav-fav" aria-selected="true"><i class="fas fa-star"></i> Favorites</a>
+                    <a class="nav-item nav-link" id="nav-bnb-tab" data-toggle="tab" href="#nav-bnb" role="tab"
+                       aria-controls="nav-bnb" aria-selected="false">BNB Markets</a>
+                    <a class="nav-item nav-link" id="nav-btc-tab" data-toggle="tab" href="#nav-btc" role="tab"
+                       aria-controls="nav-btc" aria-selected="false">BTC Markets</a>
+                    <a class="nav-item nav-link" id="nav-eth-tab" data-toggle="tab" href="#nav-eth" role="tab"
+                       aria-controls="nav-eth" aria-selected="false">ETH Markets</a>
+                    <a class="nav-item nav-link" id="nav-usdt-tab" data-toggle="tab" href="#nav-usdt" role="tab"
+                       aria-controls="nav-usdt" aria-selected="false">USDT Markets</a>
+                  </div>
+                </nav>
+                <div class="tab-content" id="nav-tabContent">
+                  <div class="tab-pane fade show active" id="nav-fav" role="tabpanel" aria-labelledby="nav-fav-tab">
+                    <table id="hm-data-table" class="table row-border hm-data-table table-hover" cellspacing="0"
+                           width="100%">
+                      <thead>
+                      <tr>
+                        <th>Pair</th>
+                        <th>Last Price</th>
+                        <th>24h Change</th>
+                        <th>24h High</th>
+                        <th>24h Low</th>
+                        <th>24h Volume</th>
+                      </tr>
+                      </thead>
+                      <tbody>
+                      <tr *ngFor="let e of [].constructor(7)" class="clickable-row" data-href="trade.html">
+                        <td>
+                          <div class="star-inner">
+                            <input id="star1" type="checkbox" name="time"/>
+                            <label for="star1"><i class="fas fa-star"></i></label>
+                            ETH/BTC
+                          </div>
+                        </td>
+                        <td><span class="green-color">0.086583</span> <span class="gray-color">/ $944.16</span></td>
+                        <td><span class="red-color">-1.87</span></td>
+                        <td>0.088899</td>
+                        <td>0.086131</td>
+                        <td>9,349.24283190</td>
+                      </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                  <div class="tab-pane fade" id="nav-bnb" role="tabpanel" aria-labelledby="nav-bnb-tab">
+                    <table id="hm-data-table" class="table row-border hm-data-table table-hover" cellspacing="0"
+                           width="100%">
+                      <thead>
+                      <tr>
+                        <th>Pair</th>
+                        <th>Last Price</th>
+                        <th>24h Change</th>
+                        <th>24h High</th>
+                        <th>24h Low</th>
+                        <th>24h Volume</th>
+                      </tr>
+                      </thead>
+                      <tbody>
+                      </tbody>
+                    </table>
+                  </div>
+                  <div class="tab-pane fade" id="nav-btc" role="tabpanel" aria-labelledby="nav-btc-tab">
+                    <table id="hm-data-table" class="table row-border hm-data-table table-hover" cellspacing="0"
+                           width="100%">
+                      <thead>
+                      <tr>
+                        <th>Pair</th>
+                        <th>Last Price</th>
+                        <th>24h Change</th>
+                        <th>24h High</th>
+                        <th>24h Low</th>
+                        <th>24h Volume</th>
+                      </tr>
+                      </thead>
+                      <tbody>
+                      </tbody>
+                    </table>
+                  </div>
+                  <div class="tab-pane fade" id="nav-eth" role="tabpanel" aria-labelledby="nav-eth-tab">
+                    <table id="hm-data-table" class="table row-border hm-data-table table-hover" cellspacing="0"
+                           width="100%">
+                      <thead>
+                      <tr>
+                        <th>Pair</th>
+                        <th>Last Price</th>
+                        <th>24h Change</th>
+                        <th>24h High</th>
+                        <th>24h Low</th>
+                        <th>24h Volume</th>
+                      </tr>
+                      </thead>
+                      <tbody>
+                      </tbody>
+                    </table>
+                  </div>
+                  <div class="tab-pane fade" id="nav-usdt" role="tabpanel" aria-labelledby="nav-usdt-tab">
+                    <table id="hm-data-table" class="table row-border hm-data-table table-hover" cellspacing="0"
+                           width="100%">
+                      <thead>
+                      <tr>
+                        <th>Pair</th>
+                        <th>Last Price</th>
+                        <th>24h Change</th>
+                        <th>24h High</th>
+                        <th>24h Low</th>
+                        <th>24h Volume</th>
+                      </tr>
+                      </thead>
+                      <tbody>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

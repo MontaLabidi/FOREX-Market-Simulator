@@ -1,0 +1,80 @@
+@media (max-width: 575.98px) {
+}
+
+@media (min-width: 576px) and (max-width: 767.98px) {
+}
+
+@media (min-width: 768px) and (max-width: 991.98px) {
+}
+
+@media (min-width: 992px) and (max-width: 1199.98px) {
+}
+
+@media (min-width: 992px) {
+}
+
+@media (min-width: 1200px) {
+}
+
+@media (max-width: 1199.98px) {
+}
+
+@media (max-width: 991.98px) {
+  h6.right-side-widget-title {
+    margin-top: 0;
+  }
+
+  .left-side-widget .tab-content {
+    height: 80vh;
+  }
+
+  .right-side-widget-outer {
+    margin-top: 2em;
+  }
+
+  .advanced .right-side-widget.history {
+    height: 34vh;
+  }
+
+  .currency-select {
+    top: 0;
+  }
+}
+
+@media (max-width: 767.98px) {
+  header .sticky {
+    text-align: center;
+  }
+
+  header .sticky p {
+    margin-top: 5px;
+    margin-bottom: 5px;
+  }
+
+  footer {
+    text-align: center
+  }
+
+  .copy-bar .statistics {
+    text-align: center;
+  }
+
+  footer .social {
+    text-align: center
+  }
+
+  .head-splits.name {
+    display: block;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .left-side-widget .tab-content {
+    height: 40vh;
+  }
+
+  h6.right-side-widget-title {
+    margin-top: 20px;
+  }
+
+}

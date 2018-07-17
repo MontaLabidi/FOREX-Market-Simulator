@@ -1,0 +1,217 @@
+<div class="col-md-auto">
+
+  <!-- TradingView Widget BEGIN -->
+
+  <div class="tradingview-widget-container">
+    <div id="tradingview_75d53"></div>
+  </div>
+  <!-- TradingView Widget END -->
+  <div class="home-data-table">
+    <table id="hm-data-table" class="table row-border hm-data-table table-hover">
+      <thead>
+      <tr>
+        <th>Pair</th>
+        <th>Last Price</th>
+        <th>24h Change</th>
+        <th>24h High</th>
+        <th>24h Low</th>
+        <th>24h Volume</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let currency of currencies" class="clickable-row" (click)="setCurrency(currency.id) "
+          [class.highlighted_row]="currency.id === currentCurrency.id">
+        <td>
+          <div class="star-inner">
+            <input id="star1" type="checkbox" name="time"/>
+            <label for="star1"><i class="fas fa-star"></i></label>
+            {{currency.baseCurrency}}/{{currency.quoteCurrency}}
+          </div>
+        </td>
+        <td><span class="green-color">{{currency.quote}}</span></td>
+        <td><span class="red-color">0</span></td>
+        <td>{{currency.dayHigh}}</td>
+        <td>{{currency.dayLow}}</td>
+        <td>{{currency.volume}}</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="center-widget">
+    <ul class="nav nav-tabs" id="myTab" role="tablist">
+      <li class="nav-item">
+        <a class="nav-link active" id="market-tab" data-toggle="tab" href="#market" role="tab" aria-controls="market"
+           aria-selected="true">Market</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" id="limit-tab" data-toggle="tab" href="#limit" role="tab" aria-controls="limit"
+           aria-selected="false">Limit</a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link" id="stop-limit-tab" data-toggle="tab" href="#stop-limit" role="tab"
+           aria-controls="stop-limit" aria-selected="false">Stop-Limit</a>
+      </li>
+    </ul>
+    <div class="tab-content" id="myTabContent">
+      <div class="tab-pane fade  show active" id="market" role="tabpanel" aria-labelledby="market-tab">
+        <div class="row">
+          <div class="col-md-6 col-sm-6 col-xs-12">
+            <form [formGroup]="orderForm" (ngSubmit)="onSubmit('BUY')">
+              <h6 class="title">
+                <strong>Buy {{currentCurrency?.baseCurrency}}</strong><span>{{currentCurrency?.quoteCurrency}}
+                : {{currentCurrency?.quote}}</span></h6>
+              <div class="form-group">
+                <label for="">Price</label>
+                <input type="number" class="form-control" formControlName="Price"
+                       placeholder="{{currentCurrency?.quote_currency}}"
+                       [ngClass]="{ 'is-invalid': submitted_buy && f.Price.errors }">
+                <div>*0 Market price</div>
+                <div *ngIf="submitted_buy && f.Price.errors" class="invalid-feedback">
+                  <div *ngIf="f.Price.errors.required">Price is required</div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="">Amount</label>
+                <input type="number" class="form-control" formControlName="Amount"
+                       placeholder="{{currentCurrency?.base_currency}}"
+                       [ngClass]="{ 'is-invalid': submitted_buy && f.Amount.errors }">
+                <div *ngIf="submitted_buy && f.Amount.errors" class="invalid-feedback">
+                  <div *ngIf="f.Amount.errors.required">Amount is required</div>
+                </div>
+              </div>
+              <div class="form-group">
+                <button class="btn btn-primary">BUY</button>
+              </div>
+            </form>
+          </div>
+
+          <div class="col-md-6 col-sm-6 col-xs-12">
+            <form [formGroup]="orderForm" (ngSubmit)="onSubmit('SELL')">
+              <h6 class="title">
+                <strong>Sell {{currentCurrency?.baseCurrency}}</strong><span>{{currentCurrency?.quoteCurrency}}
+                : {{currentCurrency?.quote}}</span></h6>
+              <div class="form-group">
+                <label for="">Price</label>
+                <input type="number" class="form-control" formControlName="Price"
+                       placeholder="{{currentCurrency?.quote_currency}}"
+                       [ngClass]="{ 'is-invalid': submitted_sell && f.Price.errors }">
+                <div>*0 Market price</div>
+                <div *ngIf="submitted_sell && f.Price.errors" class="invalid-feedback">
+                  <div *ngIf="f.Price.errors.required">Price is required</div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="">Amount</label>
+                <input type="number" class="form-control" formControlName="Amount"
+                       placeholder="{{currentCurrency?.base_currency}}"
+                       [ngClass]="{ 'is-invalid': submitted_sell && f.Amount.errors }">
+                <div *ngIf="submitted_sell && f.Amount.errors" class="invalid-feedback">
+                  <div *ngIf="f.Amount.errors.required">Amount is required</div>
+                </div>
+              </div>
+              <div class="form-group">
+                <button class="btn btn-primary">SELL</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="tab-pane fade" id="limit" role="tabpanel" aria-labelledby="limit-tab">
+        <div class="row">
+          <div class="col-md-6 col-sm-6 col-xs-12">
+            <h6 class="title">
+              <strong>Buy {{currentCurrency?.base_currency}}</strong><span>{{currentCurrency?.quote_currency}}
+              : {{currentCurrency?.quote}}</span></h6>
+            <div class="form-group">
+              <label for="">Price</label>
+              <input type="number" class="form-control" id="" placeholder="{{currentCurrency?.quote_currency}}">
+            </div>
+            <div class="form-group">
+              <label for="">Amount</label>
+              <input type="text" class="form-control" id="" placeholder="{{currentCurrency?.base_currency}}">
+            </div>
+            <div class="form-group">
+              <label for="">Toal</label>
+              <input type="text" class="form-control" id="" placeholder="{{currentCurrency?.quote_currency}}">
+            </div>
+            <div class="form-group">
+              <a class="btn btn-primary">BUY</a>
+            </div>
+          </div>
+          <div class="col-md-6 col-sm-6 col-xs-12">
+            <h6 class="title">
+              <strong>Sell {{currentCurrency?.base_currency}}</strong><span>{{currentCurrency?.quote_currency}}
+              : {{currentCurrency?.quote}}</span></h6>
+            <div class="form-group">
+              <label for="">Price</label>
+              <input type="number" class="form-control" id="" placeholder="{{currentCurrency?.quote_currency}}">
+            </div>
+            <div class="form-group">
+              <label for="">Amount</label>
+              <input type="text" class="form-control" id="" placeholder="{{currentCurrency?.base_currency}}">
+            </div>
+            <div class="form-group">
+              <label for="">Toal</label>
+              <input type="text" class="form-control" id="" placeholder="{{currentCurrency?.quote_currency}}">
+            </div>
+            <div class="form-group">
+              <a class="btn btn-primary">SELL</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="tab-pane fade" id="stop-limit" role="tabpanel" aria-labelledby="stop-limit-tab">
+        <div class="row">
+          <div class="col-md-6 col-sm-6 col-xs-12">
+            <h6 class="title"><strong>Buy {{currentCurrency?.base_currency}}</strong><span
+              class="pull-right">{{currentCurrency?.quote_currency}}: {{currentCurrency?.quote}}</span></h6>
+            <div class="form-group">
+              <label for="">Stop</label>
+              <input type="number" class="form-control" id="" placeholder="{{currentCurrency?.quote_currency}}">
+            </div>
+            <div class="form-group">
+              <label for="">Limit</label>
+              <input type="number" class="form-control" id="" placeholder="{{currentCurrency?.quote_currency}}">
+            </div>
+            <div class="form-group">
+              <label for="">Amount</label>
+              <input type="text" class="form-control" id="" placeholder="{{currentCurrency?.base_currency}}">
+            </div>
+            <div class="form-group">
+              <label for="">Toal</label>
+              <input type="text" class="form-control" id="" placeholder="{{currentCurrency?.quote_currency}}">
+            </div>
+            <div class="form-group">
+              <a class="btn btn-primary">BUY</a>
+            </div>
+          </div>
+          <div class="col-md-6 col-sm-6 col-xs-12">
+            <h6 class="title">
+              <strong>Buy {{currentCurrency?.base_currency}}</strong><span>{{currentCurrency?.quote_currency}}
+              : {{currentCurrency?.quote}}</span></h6>
+            <div class="form-group">
+              <label for="">Stop</label>
+              <input type="number" class="form-control" id="" placeholder="{{currentCurrency?.quote_currency}}">
+            </div>
+            <div class="form-group">
+              <label for="">Limit</label>
+              <input type="number" class="form-control" id="" placeholder="{{currentCurrency?.quote_currency}}">
+            </div>
+            <div class="form-group">
+              <label for="">Amount</label>
+              <input type="text" class="form-control" id="" placeholder="{{currentCurrency?.base_currency}}">
+            </div>
+            <div class="form-group">
+              <label for="">Toal</label>
+              <input type="text" class="form-control" id="" placeholder="{{currentCurrency?.quote_currency}}">
+            </div>
+            <div class="form-group">
+              <a class="btn btn-primary">BUY</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
