@@ -26,7 +26,7 @@ So until AI takes over the world, _Trade Safely_ :heavy_dollar_sign:
 
 # Getting Started
 
-### Pre-requisites
+## Pre-requisites
 
 For building and running the application you need:
 
@@ -40,22 +40,23 @@ For building and running the application you need:
     - [npm](https://www.npmjs.com/get-npm) (comes with Node.js)
 
 
-### Running the application locally
+## Running the application locally
 
 This project has three components that need to be up and running:
 
-#### Database
+### Database
 For this step we are going to have the database up and running and restore the `data/dump.sql`,
 you have two options:
 
-* If you have Mysql installed locally then just run, depend on your local configuration:
-    
-        $ mysql -u<MYSQL_USER> -p<MYSQL_PASSWORD> < data/dump.sql
+- If you have Mysql installed locally then just run:
         
+        $ mysql -u<MYSQL_USER> -p<MYSQL_PASSWORD> < data/dump.sql
+    
     change the `MYSQL_USER` and `MYSQL_PASSWORD` depending on your local configuration.
     
-* **Otherwise**, if you want to use **docker**, you need to first set up the database credentials by updating
-the `config/db-cred.cnf` file that consists of the following:   
+- **Otherwise**, if you want to use **docker**, you need to first set up the database credentials by updating
+    the `config/db-cred.cnf` file that consists of the following:   
+    
     ---    
     - `MYSQL_ROOT_PASSWORD`= The password for the root account.
     - `MYSQL_DATABASE`= The name of the database.
@@ -64,13 +65,12 @@ the `config/db-cred.cnf` file that consists of the following:
     ---
        
     Then run this command to get an instance of MySQL up and running:
-
+    
         $  docker run -d --name mysql-db  --env-file=config/db-cred.cnf -p 3306:3306  mysql:5.7.34
         
     then load the data using this command:
     
         $ docker exec -i mysql-db sh -c 'exec mysql -u"$MYSQL_USER" -p"$MYSQL_PASSWORD" "$MYSQL_DATABASE"' < data/dump.sql
-
 
 ### Backend
 First `cd` into the `FMS-backend` directory, then update the file `config/env.sh` with the right database credentials and host.
@@ -78,7 +78,7 @@ First `cd` into the `FMS-backend` directory, then update the file `config/env.sh
 **Note:** If you chose to work with **docker**, and you're using docker machine or toolbox, then the `MYSQL_HOST` should be set
 to your `docker-machine ip`, otherwise it is your `localhost`.
              
-After updating config/env.sh run this command so the backend can access the DB credentials and host from the
+After updating `config/env.sh` run this command so that the backend can access the DB credentials and host from the
 environment variables.
       
     $ source config/env.sh
@@ -89,7 +89,7 @@ There are several ways to run a Spring Boot application on your local machine. w
 
     $ mvn spring-boot:run
 
-**Note:** if you don't have `mvn` installed on your machine you can instead run`mvnw` and it will install it for you.
+**Note:** if you don't have `mvn` installed on your machine you can instead use `mvnw` and it will install it for you.
 
 ### Frontend
 First `cd` into the `FMS-frontend` directory.
@@ -104,29 +104,38 @@ then simply serve it using:
 
     $ npm start
 
-Now you should be able to access **FMS** at 
+Now you should be able to access **FMS** at http://localhost:4200/
 
 # Usage
 * The home page of **FMS** should be a summary of the changes in currencies in the day.
-You will find an option to login or register for a new account in both the home page, and the Nav bar.
+You will find an option to login or register for a new account in both the home page, and the navigation bar.
 
     ![main_page](https://user-images.githubusercontent.com/36813986/117592326-0e378c00-b130-11eb-9b34-61f51070069f.png)
 
 
-### Login and Registration
+## Login and Registration
 
 * New users need to register for an account to start trading on the application, for that click on the sign up on the navigation bar
 
     ![sign_up_empty](https://user-images.githubusercontent.com/36813986/117592338-11cb1300-b130-11eb-9069-c1439602c506.png)
 
-* After registring the user will be redirected to the login page:    
+* After registering the user will be redirected to the login page:    
 
     ![login_page](https://user-images.githubusercontent.com/36813986/117592324-0e378c00-b130-11eb-9a8e-55035b4827cb.png)
 
 * Upon the login, the user will be greeted by his profile page that has his account information and his virtual wallet status.
-Every new user will have access to “1,000,000 USD” and a leverage of 1:2 by default which he can use to open positions
-as will be explained [here](#start-trading).
-   
+
+    The **Wallet** is composed of 5 key attributes that their understanding is crucial for trading:
+    
+    - **Balance**: Shows the funds in the account, including the profit and loss from closed trades.
+    - **Equity**: It is a dynamic value and takes into consideration the profit/loss from open trades at the time.
+    - **Margin**: It  is the total amount of money that’s currently _"locked up_" to maintain all open positions.
+    - **Free Margin**: It is the amount available in the account to open NEW positions.
+    - **Profit**: It is the amount of money thus user is making from his open positions, it can be negative (called loss).
+    
+    Every new user will have access to “1,000,000 USD” and a leverage of 1:2 by default which he can use to open positions
+    as will be explained [here](#start-trading)
+       
     ![profile_page](https://user-images.githubusercontent.com/36813986/117701201-dd526800-b1be-11eb-8493-c07f142d0af4.png)
 
 * At the profile page the user can click on the edit button to change any of his account information by providing the password:    
@@ -137,7 +146,7 @@ as will be explained [here](#start-trading).
     
     ![delete_account](https://user-images.githubusercontent.com/36813986/117701524-3fab6880-b1bf-11eb-93f2-e33ee65c8de1.png)
     
-### Start Trading
+## Start Trading
 
 * To start Trading on **FMS**, the user can either click the trade button in his profile page or through the navigation
 bar to access the Trading page where he can open positions in the Currency Pair of his choosing.
@@ -162,7 +171,7 @@ and the reason for it:
     
     ![forbiden_trade](https://user-images.githubusercontent.com/36813986/117703944-2821af00-b1c2-11eb-8a9c-913645359de5.png)
 
-#### Open Positions
+## Open Positions
 
 * After opening a position, the user __Profit__ will start to change according to the Currency Pair quote changing.
     
@@ -175,7 +184,7 @@ and the reason for it:
     
     and 
     
-    _**Free** Margin = Equity – Margin_
+    _**Free Margin** = Equity – Margin_
     
     The **Free Margin** is basically the volume u can still use to open new positions.
     The **Margin** is the cost to open the position in USD and since we have a 1:2 leverage it is half of the volume to
@@ -193,7 +202,7 @@ Simply click the user icon and choose Profile:
     ![go_to_profile](https://user-images.githubusercontent.com/36813986/117724475-b6565f00-b1db-11eb-8701-9bed27ba3778.png)
 
 * At the user profile, we can see the changes to the Equity, Margin, Free Margin, and Profit bacaue of the open position,
-we can also see that the balance didn't change yet since the user didn't close any position yet:
+we can also see that the Balance didn't change yet since the user didn't close any position yet:
 
     ![current_wallet](https://user-images.githubusercontent.com/36813986/117712549-6328e000-b1cc-11eb-8b54-c5bf49460ca8.png)
     
@@ -205,7 +214,7 @@ we can also see that the balance didn't change yet since the user didn't close a
 
     ![more_open_positions_wallet](https://user-images.githubusercontent.com/36813986/117712829-bbf87880-b1cc-11eb-9475-309e1f878578.png)
 
-#### Close Positions
+## Close Positions
 
 * The user can chose to close a position simply by pressing the close button in the open positions page:
   
@@ -213,7 +222,7 @@ we can also see that the balance didn't change yet since the user didn't close a
        
    ![closed_current_positions](https://user-images.githubusercontent.com/36813986/117713504-a9cb0a00-b1cd-11eb-9d2b-5fa5a8ef7b43.png)
     
-* After closing a position the profit, Equity, balance, Margin and Free Margin will be updated:
+* After closing a position the *Profit*, *Equity*, *balance*, *Margin* and *Free Margin* will be updated:
 
     ![after_closing_position_wallet](https://user-images.githubusercontent.com/36813986/117704336-a2eaca00-b1c2-11eb-9db3-25a406252303.png)
     
@@ -221,7 +230,7 @@ we can also see that the balance didn't change yet since the user didn't close a
 
     ![closed_positions](https://user-images.githubusercontent.com/36813986/117704411-b9912100-b1c2-11eb-92d2-ca6cd097a821.png)
     
-* At the profile page, we can see that the _Margin = Profit = 0_ and that the _balance = Equity = Free Margin_
+* At the profile page, we can see that the _Margin = Profit = 0_ and that the _Balance = Equity = Free Margin_
 since there is no current positions the user can be making a profit from or investing in:
 
     ![wallet_closed_positions](https://user-images.githubusercontent.com/36813986/117704504-d0d00e80-b1c2-11eb-8fd2-7d4865568c4f.png)
@@ -234,7 +243,7 @@ quotes and perform trading operations following an underlying algorithm. For the
 for its ease of integration with Java applicatons and the workbench it provides to perform all sort of 
 tests on that dataset before the implemntation.
 
-### Data Collection & Processing
+## Data Collection & Processing
 
 The first step to build this Robot is to collect the historical data required to build the classifier,
 which [investigate.com](www.investing.com) provided.
@@ -243,8 +252,8 @@ The initial dataset features are *date*, *time*, *open*, *high*, *low* and *clos
 only the *open*, *high*, *low* and *close* since the *date* and *time* are irrelevant to this context.
 
 The next step was to label the data, and our two classes are:
-- **UP** : means that in the next hour the closing price will go up.
-- **Down** : means that in the next hour the closing price will go down.
+- **UP**: means that in the next hour the closing price will go up.
+- **Down**: means that in the next hour the closing price will go down.
 
 After collecting the data, it is now possible to use the Weka workbench Explorer to have a better understanding of our data,
 also we made sure our data is balanced, so we avoid the overfitting problem.
@@ -253,7 +262,7 @@ Here we can see that we have a total of 2501 instances composed of 1195 UP and 1
 
 ![weka_data](https://user-images.githubusercontent.com/36813986/117746262-0a753980-b204-11eb-950d-90794a487199.png)
 
-### Classification Model Setup
+## Classification Model Setup
 
 After loading the data, we used the Weka workbench for testing the performance of the classifier and experimenting with 
 models before using it in the Trading Bot application.
@@ -263,7 +272,7 @@ models before using it in the Trading Bot application.
 After testing and exploring with the Weka workbench, the most accurate model and settings got wrapped in
 the Trading Bot java application.
 
-### Running the application locally
+## Running the application locally
 
 To Run the **Trading Bot** simply run this command to package the application:
     
